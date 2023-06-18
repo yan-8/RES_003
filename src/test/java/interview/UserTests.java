@@ -179,7 +179,7 @@ public class UserTests {
                 .responseShouldHave(bodyVariableAndValue("gender", equalTo(femaleGender)))
                 .responseShouldHave(bodyVariableAndValue("age", equalTo(newUserAge)));
 
-        // check by POST /player/get
+        log.info("Steps - Check updated user entity");
         app.getUserEntityById(userDto2)
                 .responseShouldHave(statusCode(200))
                 .responseShouldHave(bodyVariableAndValue("id", equalTo(userDto2.getPlayerId())))
