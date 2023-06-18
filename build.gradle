@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'io.franzbecker.gradle-lombok' version '5.0.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    google()
+    maven {
+        url = 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    // TestNG
+    testImplementation group: 'org.testng' , name: 'testng', version: '6.14.3'
+
+    // REST Assured
+    implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
+
+    // Jackson
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.5'
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.15.+"
+
+    // Logs
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.7'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.4.8'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.8'
+
+    // Others
+    implementation group: 'io.github.serpro69', name: 'kotlin-faker', version: '1.14.0'
+    implementation group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+}
+
+test {
+    useTestNG()
+
+    systemProperties System.getProperties()
+
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
+
+    test.outputs.upToDateWhen {
+        false
+    }
+}
